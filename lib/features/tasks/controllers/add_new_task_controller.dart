@@ -2,59 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:training_task1/data/data.dart';
-import 'package:training_task1/domain/implementation/task_interactor.dart';
-import 'package:training_task1/features/categories/controllers/task_controller.dart';
+import 'package:training_task1/features/categories/controllers/change_category_mixin.dart';
 import 'package:training_task1/features/categories/screens/choose_category_screen.dart';
 import 'package:training_task1/features/home/controllers/home_controller.dart';
+import 'package:training_task1/features/tasks/controllers/task_form_controller.dart';
 import 'package:training_task1/utils/helpers.dart';
 
-class AddNewTaskController extends TaskController {
-  //variables
-  TextEditingController? titleController;
-  TextEditingController? descriptionController;
-  DateTime? selectedDate = DateTime.now();
-  int categoryId = 0;
-  TasksInteractor service = TasksInteractor();
-  // RxBool errorState = false.obs;
-
-  HomeController homeController = Get.find<HomeController>();
-
-  @override
-  void onInit() async {
-    titleController = TextEditingController();
-    descriptionController = TextEditingController();
-    super.onInit();
-  }
-
-  @override
+class AddNewTaskController extends TaskFormController with onChangeCategory {
+  
+ @override
   void onClose() {
-    titleController!.dispose();
-    descriptionController!.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
     super.onClose();
-  }
-
-  Future<Task> getTaskById(int id) async {
-    return await service.getSingleTask(id);
   }
 
   @override
   void onCategoryTypePressed(int value) {
     categoryId = value;
-    print(categoryId);
+  }
+
+  @override
+  void onSubmitForm() {
+    if (!isValidForm) return;
+    addNewTask();
+    Get.back();
+  }
+
+  Future<Task> getTaskById(int id) async {
+    return await serviceTask.getSingleTask(id);
   }
 
   void addNewTask() async {
-    String timeFormat = DateFormat("hh:mm a").format(selectedDate!).toString();
-    String dateFormat = DateFormat.yMd('en_US').format(selectedDate!);
+    HomeController homeController = Get.find<HomeController>();
+    String timeFormat = DateFormat("hh:mm a").format(selectedDate).toString();
+    String dateFormat = DateFormat.yMd('en_US').format(selectedDate);
     Task task = Task.create(
-        title: titleController!.text,
+        title: titleController.text,
         date: dateFormat,
         time: timeFormat,
-        categoryId: categoryId,
-        description: descriptionController!.text);
-    await service.addTask(task);
-    homeController.taskList.add(task);
-    homeController.taskList.refresh();
+        categoryId: categoryId ?? 1,
+        description: descriptionController.text);
+    await serviceTask.addTask(task);
+    homeController.getTasks();
   }
 
   void selectDateTime(BuildContext context) async {

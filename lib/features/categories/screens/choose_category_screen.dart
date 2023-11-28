@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:training_task1/core/values/colors.dart';
 import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/features/categories/controllers/task_controller.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
+import 'package:training_task1/domain/entities/categories.dart';
 import 'package:training_task1/features/categories/screens/create_category_screen.dart';
 import 'package:training_task1/features/categories/widgets/material_botton.dart';
 import 'package:training_task1/features/home/controllers/home_controller.dart';
+import 'package:training_task1/features/tasks/controllers/task_form_controller.dart';
 import '../widgets/category_item.dart';
 
 class ChooseCategoryScreen extends StatelessWidget {
@@ -13,7 +15,7 @@ class ChooseCategoryScreen extends StatelessWidget {
       : _homeController = Get.find<HomeController>();
 
   final HomeController _homeController;
-  final TaskController controller;
+  final TaskFormController controller;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -29,7 +31,7 @@ class ChooseCategoryScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  'Choose Category',
+                  TranslationKeys.chooseCategory,
                   style: textTheme(18, null, null),
                 ),
               ),
@@ -45,7 +47,8 @@ class ChooseCategoryScreen extends StatelessWidget {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3),
                     itemBuilder: (context, index) {
-                      var categories = _homeController.categoriesList.toList();
+                      List<Category> categories =
+                          _homeController.categoriesList.toList();
 
                       if (index < categories.length) {
                         return CategoryItem(
@@ -53,14 +56,13 @@ class ChooseCategoryScreen extends StatelessWidget {
                           name: categories[index].name,
                           color: categories[index].color,
                           onTap: () {
-                            print(controller.runtimeType);
                             controller.onCategoryTypePressed(index + 1);
                           },
                         );
                       } else {
                         return CategoryItem(
                           icon: Icons.add,
-                          name: 'Create New',
+                          name: TranslationKeys.createNew,
                           color: greyShadow.withGreen(105),
                           onTap: () => Get.to(() => CreateCategoryScreen()),
                         );
@@ -75,13 +77,13 @@ class ChooseCategoryScreen extends StatelessWidget {
                   Expanded(
                     child: MyMaterialBotton(
                         onPress: () => Get.back(),
-                        text: 'Cancel',
+                        text: TranslationKeys.cancel,
                         textColor: primaryColor),
                   ),
                   Expanded(
                     child: MyMaterialBotton(
                       onPress: () => Get.back(),
-                      text: 'Choose',
+                      text: TranslationKeys.chooseCategory,
                       textColor: Colors.white,
                       bottonColor: primaryColor,
                     ),

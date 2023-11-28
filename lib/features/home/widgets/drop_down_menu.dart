@@ -16,15 +16,16 @@ class DropDownMenu extends StatelessWidget {
             color: greyShadow, borderRadius: BorderRadius.circular(6)),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Obx(
-          () => DropdownButton<String>(
-            value: homeController.selectedValue.value,
-            onChanged: (String? value) {
-              homeController.selectedValue.value = value!;
+          () => DropdownButton<TaskStatus>(
+            value: homeController.filter.value,
+            //ToDo onSelectStatus
+            onChanged: (TaskStatus? value) {
+              homeController.filter.value = value!;
             },
             items: TaskStatus.values.map((TaskStatus status) {
-              return DropdownMenuItem<String>(
-                value: status.value,
-                child: Text(status.value),
+              return DropdownMenuItem<TaskStatus>(
+                value: status,
+                child: Text(status.name),
               );
             }).toList(),
             icon: const Icon(

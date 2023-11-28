@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:training_task1/domain/entities/categories.dart';
+import 'package:training_task1/utils/data_base_config.dart';
 
 class StorageService {
 //to create one instance of the database
@@ -32,7 +33,7 @@ class StorageService {
 
   void _onCreate(Database db, int version) async {
     await db.execute('''
-          CREATE TABLE category(
+          CREATE TABLE ${AppKeys.categoryTable}(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             color INTEGER,
@@ -40,7 +41,7 @@ class StorageService {
           )
           ''');
     await db.execute('''
-      CREATE TABLE task(
+      CREATE TABLE ${AppKeys.taskTable}(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT,
         description TEXT,
@@ -52,20 +53,5 @@ class StorageService {
         FOREIGN KEY (categoryId) REFERENCES category(id)
       )
     ''');
-  }
-
-  Future<void> createCategories(List<Category> categories) async {
-    // get a reference to the database.
-    final db = await database;
-    final categories0 = categories.map((category) => category.toMap()).toList();
-
-    for (int i = 0; i < categories0.length; ++i) {
-      await db.insert(
-        "category",
-        categories0[i],
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-      print('category $i is inserted');
-    }
   }
 }

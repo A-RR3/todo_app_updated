@@ -1,11 +1,11 @@
-// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:training_task1/core/values/colors.dart';
+import 'package:training_task1/core/values/icons.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
 import 'package:training_task1/domain/entities/task.dart';
 import 'package:training_task1/features/calendar/screens/calendar_screen.dart';
 import 'package:training_task1/features/categories/widgets/material_botton.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
 import 'package:training_task1/features/tasks/controllers/edit_task_controller.dart';
 import 'package:training_task1/features/tasks/widgets/edit_category_widget.dart';
 import 'package:training_task1/features/tasks/widgets/edit_time_widget.dart';
@@ -13,22 +13,15 @@ import 'package:training_task1/features/tasks/widgets/labeled_icon_widget.dart';
 import 'package:training_task1/features/tasks/widgets/mark_as_complete_widget.dart';
 import 'package:training_task1/features/tasks/widgets/share_task_widget.dart';
 import 'package:training_task1/features/tasks/widgets/title_description_widget.dart';
-import 'package:training_task1/utils/helpers.dart';
 
 class TaskDetailsScreen extends StatelessWidget {
-  TaskDetailsScreen({super.key, required this.task});
+  TaskDetailsScreen({super.key, required this.task})
+      : _editController = Get.put(EditTaskController(task: task));
   final Task task;
-  final homeController = Get.find<HomeController>();
-  EditTaskController editController = Get.put(EditTaskController());
+  final EditTaskController _editController;
+
   @override
   Widget build(BuildContext context) {
-    editController.titleController!.text = task.title!;
-    editController.descriptionController!.text = task.description!;
-    editController.categoryId = task.categoryId;
-    editController.selectedDate = Helpers.stringToDateTime(task.date!);
-    editController.newCategory = homeController.categoriesList
-        .firstWhere((element) => element.id == task.categoryId);
-
     return Scaffold(
       backgroundColor: bgColor,
       body: SafeArea(
@@ -39,46 +32,42 @@ class TaskDetailsScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     MarkAsComplete(
-                      onPressed: () => editController.markAsCompleted(task),
+                      onPressed: () => _editController.markAsCompleted(task),
                     ),
                     EditTitleSection(
                         task: task,
-                        onPress: () => editController.onEditIconPressed(task)),
+                        onPress: () => _editController.onEditIconPressed(task)),
                     EditTimeWidget(
-                        pathSvg: 'assets/icons/timer.svg',
+                        pathSvg: IconKeys.timerIcon,
                         task: task,
                         onPressed: () =>
-                            editController.selectDateTime(context)),
+                            _editController.selectDateTime(context)),
                     EditCategoryWidget(
-                      pathSvg: 'assets/icons/tag.svg',
-                      text: 'Task Category',
+                      pathSvg: IconKeys.tagIcon,
+                      text: TranslationKeys.taskCategory,
                       task: task,
-                      onPressed: () => editController.onChangeCategory(),
+                      onPressed: _editController.onCategoryIconPressed,
                     ),
                     Divider(
                       height: Get.height * .1,
                       color: Colors.white,
                     ),
                     ShareTaskWidget(
-                      pathSvg: 'assets/icons/share.svg',
-                      text: 'Share Task',
-                      press: () => editController.sharePressed(task),
-                      // press: () {},
+                      pathSvg: IconKeys.shareIcon,
+                      text: TranslationKeys.shareTask,
+                      press: () => _editController.sharePressed(task),
                     ),
                     LabeledIconWidget(
-                        pathSvg: 'assets/icons/calendar.svg',
-                        text: 'Calendar',
+                        pathSvg: IconKeys.calendarIcon,
+                        text: TranslationKeys.calendar,
                         press: () {
                           Get.to(() => MyCalendarScreen());
                         }),
                     LabeledIconWidget(
-                        pathSvg: 'assets/icons/trash.svg',
-                        text: 'Delete Task',
-                        color: Colors.red,
-                        press: () {
-                          homeController.deleteTask(task);
-                          Get.back();
-                        }),
+                        pathSvg: IconKeys.trashIcon,
+                        text: TranslationKeys.deleteTask,
+                        color: deleteTaskLabel,
+                        press: _editController.showDeleteConfirmationDialog),
                     SizedBox(
                       height: Get.height * .08,
                     ),
@@ -87,10 +76,10 @@ class TaskDetailsScreen extends StatelessWidget {
                         Expanded(
                             child: MyMaterialBotton(
                           onPress: () {
-                            editController.onEditBottonPressed(task);
+                            _editController.onEditBottonPressed(task);
                             Get.back();
                           },
-                          text: 'Edit',
+                          text: TranslationKeys.edit,
                           textColor: Colors.white,
                           bottonColor: primaryColor,
                         ))

@@ -1,31 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
+import 'package:training_task1/core/values/constants.dart';
 import 'package:training_task1/features/categories/controllers/create_category_controller.dart';
 
-// ignore: must_be_immutable
 class ChooseColorScreen extends StatelessWidget {
   ChooseColorScreen({super.key});
   final controller = Get.put(CreateCategoryController());
 
-  // final controller = Get.find<CreateCategoryController>();
-
-  List<int> colorsList = [
-    category1,
-    category2,
-    category3,
-    category4,
-    category5,
-    category6,
-    category7,
-    category8,
-    redAccent,
-    orangeAccent,
-    hotPink,
-    lightYellow,
-    yellowAccent,
-    purple
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +27,7 @@ class ChooseColorScreen extends StatelessWidget {
                             shape: BoxShape.circle,
                             color: Color(colorsList[index])),
                         child: GetBuilder<CreateCategoryController>(
+                          id: 'category color',
                           builder: (_) {
                             return controller.selectedCategoryColor ==
                                     colorsList[index]

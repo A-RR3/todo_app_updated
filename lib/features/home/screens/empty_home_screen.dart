@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:training_task1/core/values/constants.dart';
+import 'package:training_task1/core/values/icons.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
 
 class EmptyHomeScreen extends StatelessWidget {
   const EmptyHomeScreen({super.key});
@@ -17,7 +19,7 @@ class EmptyHomeScreen extends StatelessWidget {
               SizedBox(
                 width: Get.width * .4,
                 child: Image.asset(
-                  'assets/images/bg.png',
+                  IconKeys.background,
                 ),
               ),
               Padding(
@@ -29,14 +31,14 @@ class EmptyHomeScreen extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "What do you want to do today?\n",
+                            "${TranslationKeys.whatDoYouWantToDo}\n",
                             style: textTheme(18, null, null),
                           ),
                           const SizedBox(
                             height: 5,
                           ),
                           Text(
-                            "Tap + to add your tasks",
+                            TranslationKeys.subHomeText,
                             style: textTheme(16, FontWeight.normal, null),
                           )
                         ],

@@ -1,35 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:training_task1/core/values/colors.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
 import 'package:training_task1/data/data.dart';
-import 'package:training_task1/domain/implementation/task_interactor.dart';
-import 'package:training_task1/domain/interfaces/task_interface.dart';
-import 'package:training_task1/features/categories/controllers/task_controller.dart';
 import 'package:training_task1/features/categories/screens/choose_category_screen.dart';
 import 'package:training_task1/features/home/controllers/home_controller.dart';
+import 'package:training_task1/features/tasks/controllers/task_form_controller.dart';
 import 'package:training_task1/features/tasks/screens/edit_title_screen.dart';
 import 'package:training_task1/utils/helpers.dart';
 
-class EditTaskController extends TaskController {
-  int categoryId = 0;
-  DateTime? selectedDate = DateTime.now();
-  TextEditingController? titleController;
-  TextEditingController? descriptionController;
-  var dateIsUpdated = false.obs;
+class EditTaskController extends TaskFormController {
+  EditTaskController({required this.task});
+
+  final Task task;
+
+  RxBool dateIsUpdated = false.obs;
+
   bool categoryIsUpdated = false;
+
   late Category newCategory;
 
   @override
   void onInit() {
-    titleController = TextEditingController();
-    descriptionController = TextEditingController();
+    titleController.text = task.title!;
+    descriptionController.text = task.description!;
+    categoryId = task.categoryId;
+    selectedDate = Helpers.stringToDateTime(task.date!);
+    newCategory = Get.find<HomeController>()
+        .categoriesList
+        .firstWhere((element) => element.id == task.categoryId);
+
     super.onInit();
   }
 
   @override
   void onClose() {
-    titleController!.dispose();
-    descriptionController!.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
     super.onClose();
   }
 
@@ -53,37 +61,26 @@ class EditTaskController extends TaskController {
   }
 
   void markAsCompleted(Task task) async {
-    TasksInterface service = TasksInteractor();
     if (task.isCompleted == false) {
       task.isCompleted = true;
-      await service.updateTask(task);
+      await serviceTask.updateTask(task);
       await Get.find<HomeController>().getTasks();
-
-      // Get.find<HomeController>().getDoneTasks();
     } else {
-      Get.showSnackbar(GetSnackBar(
-        messageText: const Text('task is already done'),
-        backgroundColor: const Color(0xFF303030).withOpacity(.3),
-      ));
+      Helpers.showSnackBar(
+        message: TranslationKeys.taskIsAlreadyDone,
+      );
     }
   }
 
   String formatUpdatedDate() {
-    String day = Helpers.formatDayFromDateTime(selectedDate!);
+    String day = Helpers.formatDayFromDateTime(selectedDate);
     String time = Helpers.formatTimeFromDateTime(selectedDate);
     return '$day At $time';
-  }
-
-  void onChangeCategory() {
-    Get.dialog(ChooseCategoryScreen(
-      controller: Get.find<EditTaskController>(),
-    ));
   }
 
   @override
   void onCategoryTypePressed(int value) {
     categoryId = value;
-    print(categoryId);
     categoryIsUpdated = true;
     final homeController = Get.find<HomeController>();
     newCategory = homeController.categoriesList
@@ -100,21 +97,19 @@ class EditTaskController extends TaskController {
     String dateFormat = Helpers.formatDateFromDateTime(selectedDate);
 
     task
-      ..title = titleController!.text
-      ..description = descriptionController!.text
-      ..categoryId = categoryId
+      ..title = titleController.text
+      ..description = descriptionController.text
+      ..categoryId = categoryId ?? task.categoryId
       ..date = dateFormat
       ..time = timeFormat
       ..isCompleted = false;
 
-    TasksInteractor service = TasksInteractor();
-    service.updateTask(task);
+    serviceTask.updateTask(task);
     Get.find<HomeController>().getTasks();
   }
 
   Future<void> sharePressed(Task task) async {
-    await Share.share(_sharedMessage(task),
-        subject: "I've shared this ToDo with you!");
+    await Share.share(_sharedMessage(task), subject: TranslationKeys.subject);
   }
 
   String _sharedMessage(Task task) {
@@ -122,5 +117,27 @@ class EditTaskController extends TaskController {
     Description: ${task.description}\n
     DueDate: ${task.date}\n
     Category: ${newCategory.name}''';
+  }
+
+  void showDeleteConfirmationDialog() {
+    Get.defaultDialog(
+      title: TranslationKeys.confirmDeleteTitle,
+      middleText: TranslationKeys.confirmDelete,
+      textConfirm: TranslationKeys.delete,
+      textCancel: TranslationKeys.cancel,
+      confirmTextColor: Colors.white,
+      buttonColor: pinkClr,
+      onConfirm: () {
+        Get.find<HomeController>().deleteTask(task);
+        Helpers.showSnackBar(message: TranslationKeys.taskIsDeleted);
+        Get.back();
+      },
+    );
+  }
+
+  @override
+  void onSubmitForm() {
+    if (!isValidForm) return;
+    Get.back();
   }
 }

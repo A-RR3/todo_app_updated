@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:training_task1/data/data.dart';
-import 'package:training_task1/data/datasource/data_base.dart';
 import 'package:training_task1/domain/implementation/task_interactor.dart';
 import 'package:training_task1/domain/interfaces/task_interface.dart';
 import 'package:training_task1/utils/helpers.dart';
@@ -10,41 +10,36 @@ import 'package:training_task1/features/tasks/screens/add_new_task_screen.dart';
 import 'package:training_task1/utils/task_status.dart';
 
 class HomeController extends GetxController {
-  //variables
-  RxString selectedValue = TaskStatus.all.value.obs;
-  RxBool isLoading = true.obs;
-  RxList<Task> taskList = <Task>[].obs;
-  RxList<Category> categoriesList = <Category>[].obs;
-  // var doneTodos = <Task>[].obs;
-  // RxString dayFormat = 'Today'.obs;
+  Rx<TaskStatus> filter = TaskStatus.all.obs;
 
-  //getters
+  RxBool isLoading = true.obs;
+
+  DateFormat format = DateFormat('MM/dd/yyyy');
+
+  RxList<Task> taskList = <Task>[].obs;
+
+  RxList<Category> categoriesList = <Category>[].obs;
+
   RxInt get tasksCount => taskList.length.obs;
 
-  //database
   TasksInterface service = TasksInteractor();
 
   @override
   void onInit() async {
-    //insert some categories in the DB when it is first initialized
     await getCategories();
     await getTasks();
     super.onInit();
   }
 
   String formatDay(Task task) {
-    String dueDate = task.date!;
-    bool isToday = isEqualToday(dueDate);
+    String dueDate = task.date!; // mm/dd/yyyy
+    DateTime date = format.parse(dueDate); // yyyy-mm-dd 00:00:00
+    bool isToday = Helpers.isEqualToday(date);
 
     if (isToday) {
       return 'Today';
     }
-    return Helpers.formatDayFromDateTime(DateTime.parse(dueDate));
-    // return dayFormat.value = 'Today';
-  }
-
-  bool isEqualToday(String date) {
-    return date.split(' ')[0] == DateTime.now().toString().split(' ')[0];
+    return Helpers.formatDayFromDateTime(date);
   }
 
   Future<void> getTasks() async {
@@ -52,17 +47,20 @@ class HomeController extends GetxController {
     isLoading.value = false;
   }
 
-  List<Task> filterTasks(String value) {
+//TODO: 2
+  List<Task> filterTasks(TaskStatus value) {
     switch (value) {
       case 'All':
         return taskList;
       case 'Completed':
         return taskList.where((item) => item.isCompleted).toList();
       case 'Today':
-        return taskList.where((item) => isEqualToday(item.date!)).toList();
+        return taskList
+            .where((item) => Helpers.isEqualToday(format.parse(item.date!)))
+            .toList();
       default:
-        Get.snackbar('error', 'not included');
-        return [];
+        // Get.snackbar('error', 'not included');
+        return taskList;
     }
   }
 
@@ -85,10 +83,7 @@ class HomeController extends GetxController {
   Future<void> deleteTask(Task task) async {
     try {
       await service.deleteTask(task);
-      taskList.remove(task);
-      if (task.isCompleted == true) {
-      }
-      taskList.refresh();
+      getTasks();
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -98,23 +93,3 @@ class HomeController extends GetxController {
     Get.bottomSheet(AddNewTaskScreen());
   }
 }
-
-
-
-
-  // Future<void> createCategoriesList() async {
-  //   StorageService dbHelper = StorageService();
-  //   List<Category> categories = [
-  //     Category.create(
-  //         name: 'education',
-  //         icon: Icons.school,
-  //         color: Color.fromARGB(255, 99, 200, 250)),
-  //     Category.create(
-  //         name: 'food', icon: Icons.food_bank, color: Colors.orange),
-  //     Category.create(name: 'home', icon: Icons.home, color: Colors.green),
-  //     Category.create(
-  //         name: 'personal', icon: Icons.person, color: Colors.lightBlue),
-  //   ];
-
-  //   await dbHelper.createCategories(categories);
-  // }

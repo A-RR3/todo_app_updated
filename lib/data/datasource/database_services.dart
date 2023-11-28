@@ -1,7 +1,6 @@
 import 'package:training_task1/data/datasource/data_base.dart';
 import 'package:training_task1/domain/entities/base_entity.dart';
 
-
 abstract class DataBaseServices<T extends BaseEntity> {
   final storage = StorageService();
   final String _whereId = 'id = ?';

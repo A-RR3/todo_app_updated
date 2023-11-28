@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
 import 'package:training_task1/core/values/values.dart';
 import 'package:training_task1/features/categories/controllers/create_category_controller.dart';
 import 'package:training_task1/features/categories/screens/choose_color_screen.dart';
@@ -8,8 +9,9 @@ import 'package:training_task1/features/categories/widgets/material_botton.dart'
 import 'package:training_task1/core/widgets/common_text_field.dart';
 
 class CreateCategoryScreen extends StatelessWidget {
-  CreateCategoryScreen({super.key}): _controller = Get.put(CreateCategoryController());
-  final CreateCategoryController _controller ;
+  CreateCategoryScreen({super.key})
+      : _controller = Get.put(CreateCategoryController());
+  final CreateCategoryController _controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,25 +31,24 @@ class CreateCategoryScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Create New Category',
+                          TranslationKeys.createCategory,
                           style: textTheme(20, null, null),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         LabeledWidget(
-                          label: 'Category name:',
+                          label: TranslationKeys.categoryNameLbl,
                           widget: CommonTextField(
-                            hintText: 'Category Name',
-                            controller: _controller.categoryNameController!,
+                            hintText: TranslationKeys.categoryNameHint,
+                            controller: _controller.categoryNameController,
+                            validator: (value) =>  _controller.validateName(value),
                           ),
                         ),
                         LabeledWidget(
-                          label: 'Category icon',
+                          label: TranslationKeys.categoryIcon,
                           widget: InkWell(
-                            onTap: () {
-                              _controller.onChooseIconBottonPressed();
-                            },
+                            onTap: _controller.onChooseIconBottonPressed,
                             child: Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
@@ -58,23 +59,24 @@ class CreateCategoryScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: GetBuilder<CreateCategoryController>(
+                                    id: 'icon',
                                     builder: (_) {
-                                  IconData? icon =
-                                      _controller.selectedCategoryIcon;
-                                  return icon != null
-                                      ? Icon(icon)
-                                      : const Text(
-                                          'Choose Icon from library',
-                                          style: TextStyle(
-                                              color: Colors.white70,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400),
-                                        );
-                                })),
+                                      IconData? icon =
+                                          _controller.selectedCategoryIcon;
+                                      return icon != null
+                                          ? Icon(icon)
+                                          : const Text(
+                                              TranslationKeys.chooseFromLibrary,
+                                              style: TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w400),
+                                            );
+                                    })),
                           ),
                         ),
                         Text(
-                          'Category Color',
+                          TranslationKeys.categoryClr,
                           style: textTheme(20, null, null),
                         ),
                         const SizedBox(
@@ -90,15 +92,13 @@ class CreateCategoryScreen extends StatelessWidget {
                       Expanded(
                         child: MyMaterialBotton(
                             onPress: () => Get.back(),
-                            text: 'Cancel',
+                            text: TranslationKeys.cancel,
                             textColor: primaryColor),
                       ),
                       Expanded(
                         child: MyMaterialBotton(
-                          onPress: (){
-                            _controller.createCategory;
-                          },
-                          text: 'Create Category',
+                          onPress: _controller.createCategory,
+                          text: TranslationKeys.createCategory,
                           textColor: Colors.white,
                           bottonColor: primaryColor,
                         ),

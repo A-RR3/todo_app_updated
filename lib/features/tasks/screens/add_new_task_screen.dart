@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
 import 'package:training_task1/core/values/values.dart';
 import 'package:training_task1/features/tasks/controllers/add_new_task_controller.dart';
-import 'package:training_task1/features/tasks/controllers/task_form_controller.dart';
 import 'package:training_task1/core/widgets/common_text_field.dart';
 import 'package:training_task1/core/widgets/icon_widget.dart';
 
-class AddNewTaskScreen extends StatelessWidget with TaskFormController {
-  AddNewTaskScreen({super.key}): addTaskController =Get.put(AddNewTaskController());
-  AddNewTaskController addTaskController;
+class AddNewTaskScreen extends StatelessWidget {
+  AddNewTaskScreen({super.key})
+      : _addTaskController = Get.put(AddNewTaskController());
+      
+  final AddNewTaskController _addTaskController;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AddNewTaskController>(builder: (_) {
@@ -18,30 +21,33 @@ class AddNewTaskScreen extends StatelessWidget with TaskFormController {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         backgroundColor: greyShadow,
-        onClosing: () {},
+        onClosing: () {
+        },
         builder: (context) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Form(
-                key: formKey,
+                key: _addTaskController.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Add Task',
+                      TranslationKeys.addTask,
                       style: textTheme(20, null, null),
                     ),
                     const SizedBox(height: 12),
                     CommonTextField(
-                        hintText: "Task Title",
-                        controller: addTaskController.titleController!,
-                        validator: (value) => validateTitleInput(value)),
+                        hintText: TranslationKeys.taskTitlehint,
+                        controller: _addTaskController.titleController,
+                        validator: (value) =>
+                            _addTaskController.validateTitleInput(value)),
                     const SizedBox(height: 12),
                     CommonTextField(
-                      hintText: 'Task Description',
-                      controller: addTaskController.descriptionController!,
-                      validator: (value) => validateDescription(value),
+                      hintText: TranslationKeys.taskDescription,
+                      controller: _addTaskController.descriptionController,
+                      validator: (value) =>
+                          _addTaskController.validateDescription(value),
                     ),
                     const SizedBox(height: 12),
                     Row(
@@ -52,26 +58,22 @@ class AddNewTaskScreen extends StatelessWidget with TaskFormController {
                             child: Row(
                               children: [
                                 IconWidget(
-                                  path: 'assets/icons/timer.svg',
-                                  press: () => addTaskController
+                                  path: IconKeys.timerIcon,
+                                  press: () => _addTaskController
                                       .selectDateTime(Get.context!),
                                   size: 25,
                                 ),
                                 IconWidget(
-                                  path: 'assets/icons/tag.svg',
-                                  press: () =>
-                                      addTaskController.onCategoryIconPressed(),
+                                  path: IconKeys.tagIcon,
+                                  press: () => _addTaskController
+                                      .onCategoryIconPressed(),
                                   size: 30,
                                 )
                               ],
                             )),
                         IconWidget(
-                          path: 'assets/icons/send.svg',
-                          press: () {
-                            onSubmitForm;
-                            addTaskController.addNewTask();
-                            Get.back();
-                          },
+                          path: IconKeys.sendIcon,
+                          press: _addTaskController.onSubmitForm,
                           size: 25,
                         ),
                       ],

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:training_task1/core/values/colors.dart';
+import 'package:training_task1/core/values/icons.dart';
+import 'package:training_task1/core/values/translations_keys.dart';
 import 'package:training_task1/features/categories/widgets/material_botton.dart';
 import 'package:training_task1/features/login/login_controller.dart';
 import 'package:training_task1/core/widgets/icon_widget.dart';
 
-class LoginScreen extends GetView<LoginController> {
-  LoginScreen({super.key});
+class LoginScreen extends StatelessWidget{
+  LoginScreen({super.key}):_controller =Get.put(LoginController());
 
-  @override
-  LoginController controller = Get.put(LoginController());
+  final LoginController _controller ;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +23,7 @@ class LoginScreen extends GetView<LoginController> {
             const Spacer(
               flex: 1,
             ),
-            IconWidget(path: 'assets/icons/Vector.svg'),
-            Obx(
-              () => controller.hasFingerPrintLock.value
-                  ? const Text('support fingerprint auth')
-                  : const Text('not supported'),
-            ),
+            IconWidget(path: IconKeys.vectorIcon),
             const Spacer(
               flex: 1,
             ),
@@ -37,8 +33,8 @@ class LoginScreen extends GetView<LoginController> {
                   children: [
                     Expanded(
                       child: MyMaterialBotton(
-                        onPress: () => controller.authenticateUser(),
-                        text: 'Unlock App',
+                        onPress: () => _controller.authenticateUser(),
+                        text: TranslationKeys.unlockApp,
                         textColor: Colors.white,
                         bottonColor: primaryColor,
                       ),

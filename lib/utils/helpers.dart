@@ -7,6 +7,14 @@ import 'package:training_task1/domain/entities/task.dart';
 class Helpers {
   const Helpers._();
 
+  static void showSnackBar({required String message, Color? color}) {
+    Get.showSnackbar(GetSnackBar(
+      messageText: Text(message),
+      backgroundColor: color ?? const Color(0xFF303030).withOpacity(.3),
+      duration: const Duration(seconds: 1),
+    ));
+  }
+
   static Future<DateTime?> selectDate(BuildContext context) async {
     // final controller = Get.find<AddNewTaskController>();
     return await showDatePicker(
@@ -25,6 +33,11 @@ class Helpers {
           TimeOfDay.fromDateTime(date!), //0:00 Or TimeOfDay(hour:2,minute:30)
     );
     return pickedTime;
+  }
+
+  static bool isEqualToday(DateTime date) {
+    return date.toString().split(' ')[0] ==
+        DateTime.now().toString().split(' ')[0];
   }
 
   static String formatDayFromDateTime(DateTime date) {

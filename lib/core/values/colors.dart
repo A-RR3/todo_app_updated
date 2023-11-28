@@ -4,7 +4,7 @@ const greyShadow = Color(0xFF363636);
 const bgColor = Color(0xFF121212);
 const primaryColor = Color(0xFF8687E7);
 const pinkClr = Color(0xFFff4667);
-
+const deleteTaskLabel = Colors.red;
 const int redAccent = 0xffff5252;
 const int orangeAccent = 0xffffab40;
 const int hotPink = 0xffe91e63;
