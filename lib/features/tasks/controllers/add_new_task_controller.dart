@@ -9,7 +9,6 @@ import 'package:todo_app_updated/features/tasks/controllers/task_form_controller
 import 'package:todo_app_updated/utils/helpers.dart';
 
 class AddNewTaskController extends TaskFormController with onChangeCategory {
-
   @override
   void onCategoryTypePressed(int value) {
     categoryId = value;
@@ -34,7 +33,8 @@ class AddNewTaskController extends TaskFormController with onChangeCategory {
         title: titleController.text,
         date: dateFormat,
         time: timeFormat,
-        categoryId: categoryId ?? 1,
+        categoryId:
+            categoryId ?? Get.find<HomeController>().categoriesList[0].id!,
         description: descriptionController.text);
 
     await serviceTask.addTask(task);

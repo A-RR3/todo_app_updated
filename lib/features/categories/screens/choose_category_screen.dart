@@ -93,6 +93,31 @@ class ChooseCategoryScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              Obx(
+                () => Visibility(
+                  visible: _deleteController.deleting.value,
+                  child: DragTarget(
+                    builder: (_, __, ___) {
+                      return Align(
+                        alignment: Alignment.center,
+                        child: FloatingActionButton(
+                            backgroundColor: Colors.white,
+                            onPressed: () {},
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.delete),
+                              iconSize: 30,
+                              color: redColor,
+                            )),
+                      );
+                    },
+                    // ignore: deprecated_member_use
+                    onAccept: (Category category) {
+                      _deleteController.deleteCategory(category);
+                    },
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -111,32 +136,6 @@ class ChooseCategoryScreen extends StatelessWidget {
                     ),
                   )
                 ],
-              ),
-              Obx(
-                () => Visibility(
-                  visible: _deleteController.deleting.value,
-                  child: DragTarget(
-                    builder: (_, __, ___) {
-                      return Align(
-                        alignment: Alignment.bottomRight,
-                        child: FloatingActionButton(
-                            backgroundColor: Colors.white.withOpacity(.3),
-                            onPressed: () {},
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: SvgPicture.asset(
-                                IconKeys.trashIcon,
-                              ),
-                              iconSize: 30,
-                            )),
-                      );
-                    },
-                    // ignore: deprecated_member_use
-                    onAccept: (Category category) {
-                      _deleteController.deleteCategory(category);
-                    },
-                  ),
-                ),
               ),
             ],
           )),
