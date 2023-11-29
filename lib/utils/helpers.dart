@@ -7,11 +7,13 @@ import 'package:todo_app_updated/domain/entities/task.dart';
 class Helpers {
   const Helpers._();
 
-  static void showSnackBar({required String message, Color? color}) {
+  static void showSnackBar(
+      {required String message, Color? color, SnackPosition? position}) {
     Get.showSnackbar(GetSnackBar(
       messageText: Text(message),
       backgroundColor: color ?? const Color(0xFF303030).withOpacity(.3),
       duration: const Duration(seconds: 1),
+      snackPosition: position ?? SnackPosition.BOTTOM,
     ));
   }
 

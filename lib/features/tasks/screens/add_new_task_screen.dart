@@ -21,7 +21,9 @@ class AddNewTaskScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         backgroundColor: greyShadow,
-        onClosing: () {},
+        onClosing: () {
+          _addTaskController.dispose();
+        },
         builder: (context) {
           return Padding(
             padding: const EdgeInsets.all(20.0),

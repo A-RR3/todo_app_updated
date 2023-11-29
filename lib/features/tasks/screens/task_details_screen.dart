@@ -66,7 +66,7 @@ class TaskDetailsScreen extends StatelessWidget {
                     LabeledIconWidget(
                         pathSvg: IconKeys.trashIcon,
                         text: TranslationKeys.deleteTask,
-                        color: deleteTaskLabel,
+                        color: redColor,
                         press: _editController.showDeleteConfirmationDialog),
                     SizedBox(
                       height: Get.height * .08,

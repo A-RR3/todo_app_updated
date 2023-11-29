@@ -13,16 +13,3 @@ extension HexColor on Color {
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 }
-
-extension ThreeStringEnumExtension on TaskStatus {
-  String get taskStatus {
-    switch (this) {
-      case TaskStatus.all:
-        return "All";
-      case TaskStatus.completed:
-        return "Completed";
-      case TaskStatus.today:
-        return "Today";
-    }
-  }
-}

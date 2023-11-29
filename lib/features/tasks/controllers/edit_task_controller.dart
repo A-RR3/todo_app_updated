@@ -34,13 +34,6 @@ class EditTaskController extends TaskFormController {
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    titleController.dispose();
-    descriptionController.dispose();
-    super.onClose();
-  }
-
   void onCategoryIconPressed() {
     Get.dialog(ChooseCategoryScreen(
       controller: Get.find<EditTaskController>(),
@@ -129,8 +122,10 @@ class EditTaskController extends TaskFormController {
       buttonColor: pinkClr,
       onConfirm: () {
         Get.find<HomeController>().deleteTask(task);
-        Helpers.showSnackBar(message: TranslationKeys.taskIsDeleted);
         Get.back();
+        Helpers.showSnackBar(
+            message: TranslationKeys.taskIsDeleted,
+            color: Colors.green.withOpacity(.3));
       },
     );
   }

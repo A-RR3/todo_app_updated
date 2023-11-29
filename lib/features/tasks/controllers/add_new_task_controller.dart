@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
 import 'package:todo_app_updated/data/data.dart';
 import 'package:todo_app_updated/features/categories/controllers/change_category_mixin.dart';
 import 'package:todo_app_updated/features/categories/screens/choose_category_screen.dart';
@@ -9,12 +10,6 @@ import 'package:todo_app_updated/features/tasks/controllers/task_form_controller
 import 'package:todo_app_updated/utils/helpers.dart';
 
 class AddNewTaskController extends TaskFormController with onChangeCategory {
-  @override
-  void onClose() {
-    titleController.dispose();
-    descriptionController.dispose();
-    super.onClose();
-  }
 
   @override
   void onCategoryTypePressed(int value) {
@@ -42,6 +37,7 @@ class AddNewTaskController extends TaskFormController with onChangeCategory {
         time: timeFormat,
         categoryId: categoryId ?? 1,
         description: descriptionController.text);
+
     await serviceTask.addTask(task);
     homeController.getTasks();
   }

@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       title: TranslationKeys.appName,
       theme: ThemeData.dark(useMaterial3: false),
       debugShowCheckedModeBanner: false,
-      // home: LoginScreen(),
       home: LoginScreen(),
     );
   }
