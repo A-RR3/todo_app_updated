@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/features/tasks/widgets/clip_rounded_rectangle.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/features/tasks/widgets/clip_rounded_rectangle.dart';
 
 class MarkAsComplete extends StatelessWidget {
   const MarkAsComplete({super.key, required this.onPressed});

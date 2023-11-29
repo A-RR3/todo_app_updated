@@ -1,7 +1,7 @@
-import 'package:training_task1/data/datasource/database_services.dart';
-import 'package:training_task1/domain/entities/categories.dart';
-import 'package:training_task1/domain/interfaces/category_interface.dart';
-import 'package:training_task1/utils/utils.dart';
+import 'package:todo_app_updated/data/datasource/database_services.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
+import 'package:todo_app_updated/domain/interfaces/category_interface.dart';
+import 'package:todo_app_updated/utils/utils.dart';
 
 class CategoriesServices extends DataBaseServices<Category>
     implements CategoriesInterface {

@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:training_task1/domain/entities/base_entity.dart';
-import 'package:training_task1/utils/data_base_config.dart';
+import 'package:todo_app_updated/domain/entities/base_entity.dart';
+import 'package:todo_app_updated/utils/data_base_config.dart';
 
 class Task implements BaseEntity {
   int? _id;

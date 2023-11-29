@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:training_task1/core/values/constants.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
 
 class LabeledWidget extends StatelessWidget {
   const LabeledWidget(

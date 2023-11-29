@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:training_task1/core/values/values.dart';
+import 'package:todo_app_updated/core/values/values.dart';
 
 class DoneTasksList extends StatelessWidget {
   const DoneTasksList({super.key});

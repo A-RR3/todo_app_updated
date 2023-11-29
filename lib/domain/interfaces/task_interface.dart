@@ -1,4 +1,4 @@
-import 'package:training_task1/domain/entities/task.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
 
 abstract interface class TasksInterface {
   Future<int> addTask(Task task);

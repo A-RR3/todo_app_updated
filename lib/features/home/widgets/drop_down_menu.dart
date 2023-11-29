@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
-import 'package:training_task1/utils/task_status.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/utils/task_status.dart';
 
 class DropDownMenu extends StatelessWidget {
   DropDownMenu({super.key}) : homeController = Get.find<HomeController>();
@@ -18,10 +18,7 @@ class DropDownMenu extends StatelessWidget {
         child: Obx(
           () => DropdownButton<TaskStatus>(
             value: homeController.filter.value,
-            //ToDo onSelectStatus
-            onChanged: (TaskStatus? value) {
-              homeController.filter.value = value!;
-            },
+            onChanged: homeController.onSelectStatus,
             items: TaskStatus.values.map((TaskStatus status) {
               return DropdownMenuItem<TaskStatus>(
                 value: status,

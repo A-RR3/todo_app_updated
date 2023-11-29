@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/core/values/values.dart';
-import 'package:training_task1/features/tasks/controllers/add_new_task_controller.dart';
-import 'package:training_task1/core/widgets/common_text_field.dart';
-import 'package:training_task1/core/widgets/icon_widget.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/core/values/values.dart';
+import 'package:todo_app_updated/features/tasks/controllers/add_new_task_controller.dart';
+import 'package:todo_app_updated/core/widgets/common_text_field.dart';
+import 'package:todo_app_updated/core/widgets/icon_widget.dart';
 
 class AddNewTaskScreen extends StatelessWidget {
   AddNewTaskScreen({super.key})
       : _addTaskController = Get.put(AddNewTaskController());
-      
+
   final AddNewTaskController _addTaskController;
 
   @override
@@ -21,8 +21,7 @@ class AddNewTaskScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         backgroundColor: greyShadow,
-        onClosing: () {
-        },
+        onClosing: () {},
         builder: (context) {
           return Padding(
             padding: const EdgeInsets.all(20.0),

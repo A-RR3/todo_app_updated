@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/domain/entities/categories.dart';
-import 'package:training_task1/domain/implementation/category_interactor.dart';
-import 'package:training_task1/features/categories/screens/choose_icon_screen.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
+import 'package:todo_app_updated/domain/implementation/category_interactor.dart';
+import 'package:todo_app_updated/features/categories/screens/choose_icon_screen.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
 
-class CreateCategoryController extends GetMaterialController {
+class CreateCategoryController extends GetxController {
   TextEditingController categoryNameController = TextEditingController();
   int? selectedCategoryColor;
   IconData? selectedCategoryIcon;

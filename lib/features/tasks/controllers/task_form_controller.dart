@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/domain/implementation/task_interactor.dart';
-import 'package:training_task1/features/categories/controllers/change_category_mixin.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/domain/implementation/task_interactor.dart';
+import 'package:todo_app_updated/features/categories/controllers/change_category_mixin.dart';
 
 abstract class TaskFormController extends GetxController with onChangeCategory {
   final TextEditingController titleController = TextEditingController();

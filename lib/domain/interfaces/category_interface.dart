@@ -1,4 +1,4 @@
-import 'package:training_task1/domain/entities/categories.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
 
 abstract interface class CategoriesInterface {
   Future<List<Category>> getCategories();

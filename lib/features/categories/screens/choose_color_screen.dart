@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/features/categories/controllers/create_category_controller.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/features/categories/controllers/create_category_controller.dart';
 
 class ChooseColorScreen extends StatelessWidget {
-  ChooseColorScreen({super.key});
-  final controller = Get.put(CreateCategoryController());
-
+  ChooseColorScreen({super.key})
+      : _controller = Get.put(CreateCategoryController());
+  final CreateCategoryController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ChooseColorScreen extends StatelessWidget {
               colorsList.length,
               (index) => InkWell(
                     onTap: () {
-                      controller.setCategoryColor(colorsList[index]);
+                      _controller.setCategoryColor(colorsList[index]);
                     },
                     child: Container(
                         margin: const EdgeInsets.only(top: 10, right: 10),
@@ -29,7 +29,7 @@ class ChooseColorScreen extends StatelessWidget {
                         child: GetBuilder<CreateCategoryController>(
                           id: 'category color',
                           builder: (_) {
-                            return controller.selectedCategoryColor ==
+                            return _controller.selectedCategoryColor ==
                                     colorsList[index]
                                 ? const Icon(
                                     Icons.check,
@@ -42,25 +42,3 @@ class ChooseColorScreen extends StatelessWidget {
     );
   }
 }
-
-
- 
-
-
-
-        //       ListView.separated(
-        //   itemCount: colorsList.length,
-        //   itemBuilder: (context, index) {
-        //     return InkWell(
-        //         onTap: () {},
-        //         child: Container(
-        //           height: 50,
-        //           width: 50,
-        //           decoration: BoxDecoration(
-        //             shape: BoxShape.circle,
-        //             color: Color(colorsList[index]),
-        //           ),
-        //         ));
-        //   },
-        //   separatorBuilder: (context, index) => const Gap(8),
-        // ),

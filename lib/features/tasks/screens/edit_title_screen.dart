@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/domain/entities/task.dart';
-import 'package:training_task1/features/categories/widgets/material_botton.dart';
-import 'package:training_task1/features/tasks/controllers/edit_task_controller.dart';
-import 'package:training_task1/core/widgets/common_text_field.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
+import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
+import 'package:todo_app_updated/features/tasks/controllers/edit_task_controller.dart';
+import 'package:todo_app_updated/core/widgets/common_text_field.dart';
 
 class EditTaskTitle extends StatelessWidget {
-  EditTaskTitle({super.key, required this.task}): _editController =Get.find<EditTaskController>();
+  EditTaskTitle({super.key, required this.task})
+      : _editController = Get.find<EditTaskController>();
   final Task task;
-  final EditTaskController _editController ;
+  final EditTaskController _editController;
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
@@ -31,12 +32,14 @@ class EditTaskTitle extends StatelessWidget {
                 CommonTextField(
                   hintText: task.title!,
                   controller: _editController.titleController,
-                  validator: (value) => _editController.validateTitleInput(value),
+                  validator: (value) =>
+                      _editController.validateTitleInput(value),
                 ),
                 CommonTextField(
                   hintText: task.description!,
                   controller: _editController.descriptionController,
-                  validator: (value) => _editController.validateDescription(value),
+                  validator: (value) =>
+                      _editController.validateDescription(value),
                 ),
                 Row(
                   children: [
@@ -48,8 +51,7 @@ class EditTaskTitle extends StatelessWidget {
                     ),
                     Expanded(
                       child: MyMaterialBotton(
-                        onPress: 
-                          _editController.onSubmitForm ,
+                        onPress: _editController.onSubmitForm,
                         text: TranslationKeys.edit,
                         textColor: Colors.white,
                         bottonColor: primaryColor,

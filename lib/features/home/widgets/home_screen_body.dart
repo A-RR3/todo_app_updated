@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
-import 'package:training_task1/features/home/screens/empty_home_screen.dart';
-import 'package:training_task1/features/home/screens/loading_state.dart';
-import 'package:training_task1/features/home/widgets/drop_down_menu.dart';
-import 'package:training_task1/features/home/widgets/tasks_list_view.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/features/home/screens/empty_home_screen.dart';
+import 'package:todo_app_updated/features/home/screens/loading_state.dart';
+import 'package:todo_app_updated/features/home/widgets/drop_down_menu.dart';
+import 'package:todo_app_updated/features/home/widgets/tasks_list_view.dart';
 
 class HomeBody extends StatelessWidget {
   HomeBody({super.key}) : _controller = Get.find<HomeController>();

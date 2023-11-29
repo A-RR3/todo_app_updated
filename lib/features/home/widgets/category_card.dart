@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/domain/entities/categories.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
 
 class CategoryCard extends StatelessWidget {
   final Category category;

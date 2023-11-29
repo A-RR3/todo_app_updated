@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/icons.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/features/categories/widgets/material_botton.dart';
-import 'package:training_task1/features/login/login_controller.dart';
-import 'package:training_task1/core/widgets/icon_widget.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/icons.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
+import 'package:todo_app_updated/features/login/login_controller.dart';
+import 'package:todo_app_updated/core/widgets/icon_widget.dart';
 
-class LoginScreen extends StatelessWidget{
-  LoginScreen({super.key}):_controller =Get.put(LoginController());
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key}) : _controller = Get.put(LoginController());
 
-  final LoginController _controller ;
+  final LoginController _controller;
 
   @override
   Widget build(BuildContext context) {

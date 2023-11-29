@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/domain/entities/categories.dart';
-import 'package:training_task1/features/categories/screens/create_category_screen.dart';
-import 'package:training_task1/features/categories/widgets/material_botton.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
-import 'package:training_task1/features/tasks/controllers/task_form_controller.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
+import 'package:todo_app_updated/features/categories/screens/create_category_screen.dart';
+import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/features/tasks/controllers/task_form_controller.dart';
 import '../widgets/category_item.dart';
 
 class ChooseCategoryScreen extends StatelessWidget {

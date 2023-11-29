@@ -1,5 +1,5 @@
-import 'package:training_task1/data/datasource/data_base.dart';
-import 'package:training_task1/domain/entities/base_entity.dart';
+import 'package:todo_app_updated/data/datasource/data_base.dart';
+import 'package:todo_app_updated/domain/entities/base_entity.dart';
 
 abstract class DataBaseServices<T extends BaseEntity> {
   final storage = StorageService();

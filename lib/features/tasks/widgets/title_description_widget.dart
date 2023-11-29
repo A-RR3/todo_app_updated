@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/domain/entities/task.dart';
-import 'package:training_task1/core/widgets/icon_widget.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
+import 'package:todo_app_updated/core/widgets/icon_widget.dart';
 
 class EditTitleSection extends StatelessWidget {
   const EditTitleSection(

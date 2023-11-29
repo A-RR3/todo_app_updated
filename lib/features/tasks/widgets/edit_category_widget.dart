@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/domain/entities/categories.dart';
-import 'package:training_task1/domain/entities/task.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
-import 'package:training_task1/features/tasks/controllers/edit_task_controller.dart';
-import 'package:training_task1/features/tasks/widgets/labeled_icon_widget.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/features/tasks/controllers/edit_task_controller.dart';
+import 'package:todo_app_updated/features/tasks/widgets/labeled_icon_widget.dart';
 
 class EditCategoryWidget extends StatelessWidget {
   EditCategoryWidget(

@@ -1,9 +1,9 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:get/get.dart';
-import 'package:training_task1/domain/entities/task.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
-import 'package:training_task1/utils/helpers.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/utils/helpers.dart';
 
 class CalendarController extends GetxController {
   var selectedDay = DateTime.now().obs;

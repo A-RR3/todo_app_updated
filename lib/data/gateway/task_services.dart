@@ -1,7 +1,7 @@
-import 'package:training_task1/data/datasource/database_services.dart';
-import 'package:training_task1/domain/entities/task.dart';
-import 'package:training_task1/domain/interfaces/task_interface.dart';
-import 'package:training_task1/utils/data_base_config.dart';
+import 'package:todo_app_updated/data/datasource/database_services.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
+import 'package:todo_app_updated/domain/interfaces/task_interface.dart';
+import 'package:todo_app_updated/utils/data_base_config.dart';
 
 //task provider
 class TaskServices extends DataBaseServices<Task> implements TasksInterface {

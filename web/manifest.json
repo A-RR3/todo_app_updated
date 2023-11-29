@@ -1,6 +1,6 @@
 {
-    "name": "training_task1",
-    "short_name": "training_task1",
+    "name": "todo_app_updated",
+    "short_name": "todo_app_updated",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

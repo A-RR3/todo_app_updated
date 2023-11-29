@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/core/values/values.dart';
-import 'package:training_task1/features/categories/controllers/create_category_controller.dart';
-import 'package:training_task1/features/categories/screens/choose_color_screen.dart';
-import 'package:training_task1/features/categories/widgets/labeled_text_field.dart';
-import 'package:training_task1/features/categories/widgets/material_botton.dart';
-import 'package:training_task1/core/widgets/common_text_field.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/core/values/values.dart';
+import 'package:todo_app_updated/features/categories/controllers/create_category_controller.dart';
+import 'package:todo_app_updated/features/categories/screens/choose_color_screen.dart';
+import 'package:todo_app_updated/features/categories/widgets/labeled_text_field.dart';
+import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
+import 'package:todo_app_updated/core/widgets/common_text_field.dart';
 
 class CreateCategoryScreen extends StatelessWidget {
   CreateCategoryScreen({super.key})
@@ -42,7 +42,8 @@ class CreateCategoryScreen extends StatelessWidget {
                           widget: CommonTextField(
                             hintText: TranslationKeys.categoryNameHint,
                             controller: _controller.categoryNameController,
-                            validator: (value) =>  _controller.validateName(value),
+                            validator: (value) =>
+                                _controller.validateName(value),
                           ),
                         ),
                         LabeledWidget(

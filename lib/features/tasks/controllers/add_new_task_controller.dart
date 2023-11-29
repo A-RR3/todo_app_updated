@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:training_task1/data/data.dart';
-import 'package:training_task1/features/categories/controllers/change_category_mixin.dart';
-import 'package:training_task1/features/categories/screens/choose_category_screen.dart';
-import 'package:training_task1/features/home/controllers/home_controller.dart';
-import 'package:training_task1/features/tasks/controllers/task_form_controller.dart';
-import 'package:training_task1/utils/helpers.dart';
+import 'package:todo_app_updated/data/data.dart';
+import 'package:todo_app_updated/features/categories/controllers/change_category_mixin.dart';
+import 'package:todo_app_updated/features/categories/screens/choose_category_screen.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/features/tasks/controllers/task_form_controller.dart';
+import 'package:todo_app_updated/utils/helpers.dart';
 
 class AddNewTaskController extends TaskFormController with onChangeCategory {
-  
- @override
+  @override
   void onClose() {
     titleController.dispose();
     descriptionController.dispose();

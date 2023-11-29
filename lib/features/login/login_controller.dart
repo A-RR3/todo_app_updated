@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
-import 'package:training_task1/features/home/screens/home_screen.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
+import 'package:todo_app_updated/features/home/screens/home_screen.dart';
 
 class LoginController extends GetxController {
   static final LocalAuthentication _auth = LocalAuthentication();
@@ -46,5 +46,4 @@ class LoginController extends GetxController {
       debugPrint('error $e');
     }
   }
-
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:training_task1/domain/entities/task.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
 
 @immutable
 class Helpers {

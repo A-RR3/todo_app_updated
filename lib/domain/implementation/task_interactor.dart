@@ -1,6 +1,6 @@
-import 'package:training_task1/data/gateway/task_services.dart';
-import 'package:training_task1/domain/entities/task.dart';
-import 'package:training_task1/domain/interfaces/task_interface.dart';
+import 'package:todo_app_updated/data/gateway/task_services.dart';
+import 'package:todo_app_updated/domain/entities/task.dart';
+import 'package:todo_app_updated/domain/interfaces/task_interface.dart';
 
 class TasksInteractor implements TasksInterface {
   final TaskServices _gateway;

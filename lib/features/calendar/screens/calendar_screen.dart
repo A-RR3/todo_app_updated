@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paged_vertical_calendar/paged_vertical_calendar.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/features/calendar/controllers/calendar_controller.dart';
-import 'package:training_task1/features/home/widgets/task_item.dart';
-import 'package:training_task1/utils/helpers.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/features/calendar/controllers/calendar_controller.dart';
+import 'package:todo_app_updated/features/home/widgets/task_item.dart';
+import 'package:todo_app_updated/utils/helpers.dart';
 
 class MyCalendarScreen extends StatelessWidget {
   MyCalendarScreen({super.key});

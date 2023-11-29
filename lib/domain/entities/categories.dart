@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:training_task1/domain/entities/base_entity.dart';
-import 'package:training_task1/utils/data_base_config.dart';
+import 'package:todo_app_updated/domain/entities/base_entity.dart';
+import 'package:todo_app_updated/utils/data_base_config.dart';
 
 class Category implements BaseEntity {
   int? _id;
@@ -21,9 +21,8 @@ class Category implements BaseEntity {
   @override
   String get table => AppKeys.categoryTable;
 
-
   @override
-  Map<String, dynamic>  toMap() =>{
+  Map<String, dynamic> toMap() => {
         'name': name,
         'icon': icon.codePoint,
         'color': color.value,
@@ -32,9 +31,9 @@ class Category implements BaseEntity {
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
       map['id'],
-      map['name'] ,
-      IconData(map['icon'] , fontFamily: 'MaterialIcons'),
-      Color(map['color'] ),
+      map['name'],
+      IconData(map['icon'], fontFamily: 'MaterialIcons'),
+      Color(map['color']),
     );
   }
 }

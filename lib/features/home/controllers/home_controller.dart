@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:training_task1/data/data.dart';
-import 'package:training_task1/domain/implementation/task_interactor.dart';
-import 'package:training_task1/domain/interfaces/task_interface.dart';
-import 'package:training_task1/utils/helpers.dart';
-import 'package:training_task1/domain/implementation/category_interactor.dart';
-import 'package:training_task1/features/tasks/screens/add_new_task_screen.dart';
-import 'package:training_task1/utils/task_status.dart';
+import 'package:todo_app_updated/data/data.dart';
+import 'package:todo_app_updated/domain/implementation/task_interactor.dart';
+import 'package:todo_app_updated/domain/interfaces/task_interface.dart';
+import 'package:todo_app_updated/utils/helpers.dart';
+import 'package:todo_app_updated/domain/implementation/category_interactor.dart';
+import 'package:todo_app_updated/features/tasks/screens/add_new_task_screen.dart';
+import 'package:todo_app_updated/utils/task_status.dart';
 
 class HomeController extends GetxController {
   Rx<TaskStatus> filter = TaskStatus.all.obs;
@@ -31,6 +31,10 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  void onSelectStatus(TaskStatus? value) {
+    filter.value = value!;
+  }
+
   String formatDay(Task task) {
     String dueDate = task.date!; // mm/dd/yyyy
     DateTime date = format.parse(dueDate); // yyyy-mm-dd 00:00:00
@@ -47,20 +51,18 @@ class HomeController extends GetxController {
     isLoading.value = false;
   }
 
-//TODO: 2
   List<Task> filterTasks(TaskStatus value) {
     switch (value) {
-      case 'All':
+      case TaskStatus.all:
         return taskList;
-      case 'Completed':
+      case TaskStatus.completed:
         return taskList.where((item) => item.isCompleted).toList();
-      case 'Today':
+      case TaskStatus.today:
         return taskList
             .where((item) => Helpers.isEqualToday(format.parse(item.date!)))
             .toList();
       default:
-        // Get.snackbar('error', 'not included');
-        return taskList;
+        return [];
     }
   }
 

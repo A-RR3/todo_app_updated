@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:training_task1/core/values/constants.dart';
-import 'package:training_task1/core/values/icons.dart';
-import 'package:training_task1/core/values/translations_keys.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/core/values/icons.dart';
+import 'package:todo_app_updated/core/values/translations_keys.dart';
 
 class EmptyHomeScreen extends StatelessWidget {
   const EmptyHomeScreen({super.key});

@@ -1,6 +1,6 @@
-import 'package:training_task1/domain/entities/categories.dart';
-import 'package:training_task1/domain/interfaces/category_interface.dart';
-import 'package:training_task1/data/gateway/category_services.dart';
+import 'package:todo_app_updated/domain/entities/categories.dart';
+import 'package:todo_app_updated/domain/interfaces/category_interface.dart';
+import 'package:todo_app_updated/data/gateway/category_services.dart';
 
 class CategoriesInteractor implements CategoriesInterface {
   final CategoriesServices _gateway;

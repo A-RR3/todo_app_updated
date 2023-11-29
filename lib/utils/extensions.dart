@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:training_task1/utils/task_status.dart';
+import 'package:todo_app_updated/utils/task_status.dart';
 
 extension BuildContextExtensions on BuildContext {
   Size get deviceSize => MediaQuery.sizeOf(this);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:training_task1/core/values/colors.dart';
-import 'package:training_task1/core/values/constants.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem(
