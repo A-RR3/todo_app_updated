@@ -3,16 +3,17 @@ import 'package:todo_app_updated/core/values/colors.dart';
 import 'package:todo_app_updated/core/values/constants.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem(
-      {super.key,
-      required this.icon,
-      required this.name,
-      required this.color,
-      required this.onTap});
+  const CategoryItem({
+    super.key,
+    required this.icon,
+    required this.name,
+    required this.color,
+    this.onTap,
+  });
   final IconData icon;
   final String name;
   final Color? color;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

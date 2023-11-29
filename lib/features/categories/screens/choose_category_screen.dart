@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:todo_app_updated/core/values/colors.dart';
 import 'package:todo_app_updated/core/values/constants.dart';
+import 'package:todo_app_updated/core/values/icons.dart';
 import 'package:todo_app_updated/core/values/translations_keys.dart';
 import 'package:todo_app_updated/domain/entities/categories.dart';
+import 'package:todo_app_updated/features/categories/controllers/delete_category_controller.dart';
 import 'package:todo_app_updated/features/categories/screens/create_category_screen.dart';
 import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
 import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
@@ -12,10 +15,12 @@ import '../widgets/category_item.dart';
 
 class ChooseCategoryScreen extends StatelessWidget {
   ChooseCategoryScreen({super.key, required this.controller})
-      : _homeController = Get.find<HomeController>();
+      : _homeController = Get.find<HomeController>(),
+        _deleteController = Get.put(DeleteCategoryController());
 
   final HomeController _homeController;
   final TaskFormController controller;
+  final DeleteCategoryController _deleteController;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -51,13 +56,30 @@ class ChooseCategoryScreen extends StatelessWidget {
                           _homeController.categoriesList.toList();
 
                       if (index < categories.length) {
-                        return CategoryItem(
-                          icon: categories[index].icon,
-                          name: categories[index].name,
-                          color: categories[index].color,
-                          onTap: () {
-                            controller.onCategoryTypePressed(index + 1);
-                          },
+                        return LongPressDraggable(
+                          data: categories[index],
+                          onDragStarted: () =>
+                              _deleteController.changeDeleting(true),
+                          onDraggableCanceled: (_, __) =>
+                              _deleteController.changeDeleting(false),
+                          onDragEnd: (_) =>
+                              _deleteController.changeDeleting(false),
+                          feedback: Opacity(
+                            opacity: .8,
+                            child: CategoryItem(
+                              icon: categories[index].icon,
+                              name: categories[index].name,
+                              color: categories[index].color,
+                            ),
+                          ),
+                          child: CategoryItem(
+                            icon: categories[index].icon,
+                            name: categories[index].name,
+                            color: categories[index].color,
+                            onTap: () {
+                              controller.onCategoryTypePressed(index + 1);
+                            },
+                          ),
                         );
                       } else {
                         return CategoryItem(
@@ -89,7 +111,33 @@ class ChooseCategoryScreen extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
+              Obx(
+                () => Visibility(
+                  visible: _deleteController.deleting.value,
+                  child: DragTarget(
+                    builder: (_, __, ___) {
+                      return Align(
+                        alignment: Alignment.bottomRight,
+                        child: FloatingActionButton(
+                            backgroundColor: Colors.white.withOpacity(.3),
+                            onPressed: () {},
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: SvgPicture.asset(
+                                IconKeys.trashIcon,
+                              ),
+                              iconSize: 30,
+                            )),
+                      );
+                    },
+                    // ignore: deprecated_member_use
+                    onAccept: (Category category) {
+                      _deleteController.deleteCategory(category);
+                    },
+                  ),
+                ),
+              ),
             ],
           )),
     );
