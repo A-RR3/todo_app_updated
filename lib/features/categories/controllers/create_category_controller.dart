@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app_updated/core/values/constants.dart';
 import 'package:todo_app_updated/domain/entities/categories.dart';
 import 'package:todo_app_updated/domain/implementation/category_interactor.dart';
 import 'package:todo_app_updated/features/categories/screens/choose_icon_screen.dart';
@@ -9,6 +10,9 @@ class CreateCategoryController extends GetxController {
   TextEditingController categoryNameController = TextEditingController();
   int? selectedCategoryColor;
   IconData? selectedCategoryIcon;
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  bool get isValidForm => formKey.currentState?.validate() ?? false;
 
   @override
   void onClose() {
@@ -32,11 +36,12 @@ class CreateCategoryController extends GetxController {
   }
 
   void createCategory() async {
+    if (!isValidForm) return;
     CategoriesInteractor service = CategoriesInteractor();
     Category category = Category.create(
         name: categoryNameController.text,
-        icon: selectedCategoryIcon!,
-        color: Color(selectedCategoryColor!));
+        icon: selectedCategoryIcon ?? icons[0],
+        color: Color(selectedCategoryColor ?? colorsList[0]));
     await service.createCategory(category);
     Get.find<HomeController>().getCategories();
     Get.back();

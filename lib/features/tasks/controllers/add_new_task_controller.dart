@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_app_updated/core/values/colors.dart';
 import 'package:todo_app_updated/data/data.dart';
 import 'package:todo_app_updated/features/categories/controllers/change_category_mixin.dart';
 import 'package:todo_app_updated/features/categories/screens/choose_category_screen.dart';

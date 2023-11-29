@@ -39,11 +39,14 @@ class CreateCategoryScreen extends StatelessWidget {
                         ),
                         LabeledWidget(
                           label: TranslationKeys.categoryNameLbl,
-                          widget: CommonTextField(
-                            hintText: TranslationKeys.categoryNameHint,
-                            controller: _controller.categoryNameController,
-                            validator: (value) =>
-                                _controller.validateName(value),
+                          widget: Form(
+                            key: _controller.formKey,
+                            child: CommonTextField(
+                              hintText: TranslationKeys.categoryNameHint,
+                              controller: _controller.categoryNameController,
+                              validator: (value) =>
+                                  _controller.validateName(value),
+                            ),
                           ),
                         ),
                         LabeledWidget(
