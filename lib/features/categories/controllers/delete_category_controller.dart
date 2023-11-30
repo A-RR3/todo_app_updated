@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:todo_app_updated/data/data.dart';
-import 'package:todo_app_updated/domain/entities/categories.dart';
 import 'package:todo_app_updated/domain/implementation/category_interactor.dart';
 import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
 
@@ -16,6 +15,7 @@ class DeleteCategoryController extends GetxController {
     CategoriesInteractor service = CategoriesInteractor();
     int id = await service.deleteCategory(category);
     taskHasCategory(id);
+    controller.getTasks();
     controller.getCategories();
   }
 

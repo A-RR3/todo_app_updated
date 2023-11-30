@@ -34,6 +34,13 @@ class EditTaskController extends TaskFormController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.onClose();
+  }
+
   void onCategoryIconPressed() {
     Get.dialog(ChooseCategoryScreen(
       controller: Get.find<EditTaskController>(),

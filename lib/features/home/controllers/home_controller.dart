@@ -18,7 +18,7 @@ class HomeController extends GetxController {
 
   RxList<Task> taskList = <Task>[].obs;
 
-  RxList<Category> categoriesList = <Category>[].obs;
+  List<Category> categoriesList = <Category>[];
 
   RxInt get tasksCount => taskList.length.obs;
 
@@ -72,7 +72,12 @@ class HomeController extends GetxController {
 
   Future<void> getCategories() async {
     CategoriesInteractor service = CategoriesInteractor();
-    categoriesList.value = await service.getCategories();
+    categoriesList = await service.getCategories();
+    update(['categories list']);
+  }
+
+  int? getFirstCategory() {
+    return categoriesList.first.id;
   }
 
   void toggleTaskCompletion(Task task) async {

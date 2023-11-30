@@ -25,6 +25,13 @@ abstract class TaskFormController extends GetxController with onChangeCategory {
   bool get isValidForm => formKey.currentState?.validate() ?? false;
 
   @override
+  void onClose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.onClose();
+  }
+
+  @override
   void onCategoryTypePressed(int value);
 
   String? validateTitleInput(String? value) {

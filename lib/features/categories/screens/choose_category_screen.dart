@@ -43,8 +43,9 @@ class ChooseCategoryScreen extends StatelessWidget {
                 thickness: 2,
                 height: 40,
               ),
-              Obx(
-                () => Expanded(
+              GetBuilder<HomeController>(
+                id: 'categories list',
+                builder: (_) => Expanded(
                   child: GridView.builder(
                     itemCount: _homeController.categoriesList.length + 1,
                     gridDelegate:

@@ -10,6 +10,13 @@ import 'package:todo_app_updated/utils/helpers.dart';
 
 class AddNewTaskController extends TaskFormController with onChangeCategory {
   @override
+  void onClose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.onClose();
+  }
+
+  @override
   void onCategoryTypePressed(int value) {
     categoryId = value;
   }
@@ -31,12 +38,12 @@ class AddNewTaskController extends TaskFormController with onChangeCategory {
     HomeController homeController = Get.find<HomeController>();
     String timeFormat = DateFormat("hh:mm a").format(selectedDate).toString();
     String dateFormat = DateFormat.yMd('en_US').format(selectedDate);
+    int? firstCategoryId = Get.find<HomeController>().getFirstCategory();
     Task task = Task.create(
         title: titleController.text,
         date: dateFormat,
         time: timeFormat,
-        categoryId:
-            categoryId ?? Get.find<HomeController>().categoriesList[0].id!,
+        categoryId: categoryId ?? firstCategoryId!,
         description: descriptionController.text);
 
     await serviceTask.addTask(task);
