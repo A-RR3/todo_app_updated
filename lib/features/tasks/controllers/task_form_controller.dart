@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app_updated/core/values/colors.dart';
 import 'package:todo_app_updated/core/values/translations_keys.dart';
 import 'package:todo_app_updated/domain/implementation/task_interactor.dart';
 import 'package:todo_app_updated/features/categories/controllers/change_category_mixin.dart';
+import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
+import 'package:todo_app_updated/utils/helpers.dart';
 
 abstract class TaskFormController extends GetxController with onChangeCategory {
   final TextEditingController titleController = TextEditingController();
@@ -11,6 +14,8 @@ abstract class TaskFormController extends GetxController with onChangeCategory {
 
   DateTime selectedDate = DateTime.now();
 
+  bool get isCategoryListEmpty => _isCategoryListEmpty();
+
   int? categoryId;
 
   TasksInteractor serviceTask = TasksInteractor();
@@ -18,6 +23,9 @@ abstract class TaskFormController extends GetxController with onChangeCategory {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool get isValidForm => formKey.currentState?.validate() ?? false;
+
+  @override
+  void onCategoryTypePressed(int value);
 
   String? validateTitleInput(String? value) {
     if (value == null || value.trim().isEmpty) return TranslationKeys.required;
@@ -36,8 +44,18 @@ abstract class TaskFormController extends GetxController with onChangeCategory {
     return null;
   }
 
-  void onSubmitForm();
+  bool _isCategoryListEmpty() {
+    bool isCategoriesListEmpty =
+        Get.find<HomeController>().categoriesList.isEmpty;
+    if (isCategoriesListEmpty) {
+      Helpers.showSnackBar(
+          message: "Create at least one category",
+          color: redColor,
+          position: SnackPosition.TOP);
+      return true;
+    }
+    return false;
+  }
 
-  @override
-  void onCategoryTypePressed(int value);
+  void onSubmitForm();
 }

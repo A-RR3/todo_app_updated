@@ -20,13 +20,9 @@ class LoginScreen extends StatelessWidget {
           child: Center(
         child: Column(
           children: [
-            const Spacer(
-              flex: 1,
-            ),
+            const Spacer(),
             IconWidget(path: IconKeys.vectorIcon),
-            const Spacer(
-              flex: 1,
-            ),
+            const Spacer(),
             Align(
                 heightFactor: 2,
                 child: Row(
