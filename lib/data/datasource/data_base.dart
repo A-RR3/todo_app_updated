@@ -1,6 +1,5 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_app_updated/domain/entities/categories.dart';
 import 'package:todo_app_updated/utils/data_base_config.dart';
 
 class StorageService {
