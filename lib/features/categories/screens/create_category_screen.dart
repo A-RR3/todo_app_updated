@@ -4,6 +4,7 @@ import 'package:todo_app_updated/core/values/translations_keys.dart';
 import 'package:todo_app_updated/core/values/values.dart';
 import 'package:todo_app_updated/features/categories/controllers/create_category_controller.dart';
 import 'package:todo_app_updated/features/categories/screens/choose_color_screen.dart';
+import 'package:todo_app_updated/features/categories/widgets/choose_icon_widget.dart';
 import 'package:todo_app_updated/features/categories/widgets/labeled_text_field.dart';
 import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
 import 'package:todo_app_updated/core/widgets/common_text_field.dart';
@@ -49,36 +50,7 @@ class CreateCategoryScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        LabeledWidget(
-                          label: TranslationKeys.categoryIcon,
-                          widget: InkWell(
-                            onTap: _controller.onChooseIconBottonPressed,
-                            child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: greyShadow,
-                                  border: Border.all(
-                                      color: Colors.white70, width: 1),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: GetBuilder<CreateCategoryController>(
-                                    id: 'icon',
-                                    builder: (_) {
-                                      IconData? icon =
-                                          _controller.selectedCategoryIcon;
-                                      return icon != null
-                                          ? Icon(icon)
-                                          : const Text(
-                                              TranslationKeys.chooseFromLibrary,
-                                              style: TextStyle(
-                                                  color: Colors.white70,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w400),
-                                            );
-                                    })),
-                          ),
-                        ),
+                        ChooseIcon(),
                         Text(
                           TranslationKeys.categoryClr,
                           style: textTheme(20, null, null),

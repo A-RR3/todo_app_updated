@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:todo_app_updated/core/values/colors.dart';
 import 'package:todo_app_updated/core/values/constants.dart';
-import 'package:todo_app_updated/core/values/icons.dart';
 import 'package:todo_app_updated/core/values/translations_keys.dart';
 import 'package:todo_app_updated/domain/entities/categories.dart';
 import 'package:todo_app_updated/features/categories/controllers/delete_category_controller.dart';
 import 'package:todo_app_updated/features/categories/screens/create_category_screen.dart';
+import 'package:todo_app_updated/features/categories/widgets/delete_category.circle.dart';
 import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
 import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
 import 'package:todo_app_updated/features/tasks/controllers/task_form_controller.dart';
@@ -93,31 +92,7 @@ class ChooseCategoryScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Obx(
-                () => Visibility(
-                  visible: _deleteController.deleting.value,
-                  child: DragTarget(
-                    builder: (_, __, ___) {
-                      return Align(
-                        alignment: Alignment.center,
-                        child: FloatingActionButton(
-                            backgroundColor: Colors.white,
-                            onPressed: () {},
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.delete),
-                              iconSize: 30,
-                              color: redColor,
-                            )),
-                      );
-                    },
-                    // ignore: deprecated_member_use
-                    onAccept: (Category category) {
-                      _deleteController.deleteCategory(category);
-                    },
-                  ),
-                ),
-              ),
+              DeleteCategory(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
