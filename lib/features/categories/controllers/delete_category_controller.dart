@@ -6,24 +6,24 @@ import 'package:todo_app_updated/features/home/controllers/home_controller.dart'
 class DeleteCategoryController extends GetxController {
   RxBool deleting = false.obs;
   HomeController controller = Get.find<HomeController>();
+  CategoriesInteractor service = CategoriesInteractor();
 
   void changeDeleting(bool val) {
     deleting.value = val;
   }
 
   void deleteCategory(Category category) async {
-    CategoriesInteractor service = CategoriesInteractor();
-    int id = await service.deleteCategory(category);
-    taskHasCategory(id);
-    controller.getTasks();
+    await service.deleteCategory(category);
+    await deleteTasksOfCategory(category.id!);
     controller.getCategories();
   }
 
-  void taskHasCategory(int id) {
+  Future<void> deleteTasksOfCategory(int id) async {
     for (Task task in controller.taskList) {
       if (task.categoryId == id) {
-        controller.deleteTask(task);
+        await controller.deleteTask(task);
       }
     }
+    controller.getTasks();
   }
 }

@@ -9,6 +9,7 @@ import 'package:todo_app_updated/features/tasks/controllers/task_form_controller
 import 'package:todo_app_updated/utils/helpers.dart';
 
 class AddNewTaskController extends TaskFormController with onChangeCategory {
+
   @override
   void onClose() {
     titleController.dispose();
