@@ -13,7 +13,7 @@ class CategoriesServices extends DataBaseServices<Category>
   }
 
   @override
-  Future<Category> findCategory(int categoryId) async {
+  Future<Category> getOneCategory(int categoryId) async {
     return retrieveOne(table, Category.fromMap, categoryId);
   }
 
@@ -26,4 +26,6 @@ class CategoriesServices extends DataBaseServices<Category>
   Future<int> deleteCategory(Category model) async {
     return await delete(model);
   }
+
+
 }

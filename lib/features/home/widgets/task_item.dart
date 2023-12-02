@@ -109,9 +109,18 @@ class TaskItem extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: CategoryCard(
-                  category: controller.getTaskCategory(task.categoryId),
-                  isCompleted: task.isCompleted),
+              child: FutureBuilder(
+                future: controller.getTaskCategory(task.categoryId),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return CategoryCard(
+                        category: snapshot.data!,
+                        isCompleted: task.isCompleted);
+                  } else {
+                    return const Text('no data');
+                  }
+                },
+              ),
             )
           ]),
         ),

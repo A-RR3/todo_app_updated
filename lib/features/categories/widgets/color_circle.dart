@@ -5,7 +5,7 @@ class ColorCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return const ClipRRect(
       // borderRadius: BorderRadiusGeometry(),
     );
   }

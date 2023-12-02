@@ -43,8 +43,8 @@ class EditTaskController extends TaskFormController {
 
   void onCategoryIconPressed() {
     Get.dialog(ChooseCategoryScreen(
-      controller: Get.find<EditTaskController>(),
-    ));
+        // controller: Get.find<EditTaskController>(),
+        ));
   }
 
   Future<void> selectDateTime(BuildContext context) async {

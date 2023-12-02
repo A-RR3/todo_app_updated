@@ -13,8 +13,8 @@ class CategoriesInteractor implements CategoriesInterface {
   }
 
   @override
-  Future<Category> findCategory(int categoryId) async {
-    return await _gateway.findCategory(categoryId);
+  Future<Category> getOneCategory(int categoryId) async {
+    return await _gateway.getOneCategory(categoryId);
   }
 
   @override
@@ -26,4 +26,5 @@ class CategoriesInteractor implements CategoriesInterface {
   Future<int> deleteCategory(Category category) async {
     return await _gateway.deleteCategory(category);
   }
+
 }

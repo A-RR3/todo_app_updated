@@ -7,7 +7,7 @@ import 'package:todo_app_updated/features/home/widgets/task_item.dart';
 import 'package:todo_app_updated/features/tasks/screens/task_details_screen.dart';
 
 class TaskListView extends StatelessWidget {
-  TaskListView(this.tasks) : _controller = Get.find<HomeController>();
+  TaskListView(this.tasks, {super.key}) : _controller = Get.find<HomeController>();
 
   final List<Task>? tasks;
   final HomeController _controller;

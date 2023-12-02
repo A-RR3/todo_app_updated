@@ -9,7 +9,6 @@ import 'package:todo_app_updated/features/tasks/controllers/task_form_controller
 import 'package:todo_app_updated/utils/helpers.dart';
 
 class AddNewTaskController extends TaskFormController with onChangeCategory {
-
   @override
   void onClose() {
     titleController.dispose();
@@ -39,7 +38,7 @@ class AddNewTaskController extends TaskFormController with onChangeCategory {
     HomeController homeController = Get.find<HomeController>();
     String timeFormat = DateFormat("hh:mm a").format(selectedDate).toString();
     String dateFormat = DateFormat.yMd('en_US').format(selectedDate);
-    int? firstCategoryId = Get.find<HomeController>().getFirstCategory();
+    int? firstCategoryId = await Get.find<HomeController>().getFirstCategory();
     Task task = Task.create(
         title: titleController.text,
         date: dateFormat,
@@ -65,7 +64,7 @@ class AddNewTaskController extends TaskFormController with onChangeCategory {
 
   void onCategoryIconPressed() {
     Get.dialog(ChooseCategoryScreen(
-      controller: Get.find<AddNewTaskController>(),
-    ));
+        // controller: Get.find<AddNewTaskController>(),
+        ));
   }
 }

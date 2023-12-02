@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -66,18 +67,29 @@ class HomeController extends GetxController {
     }
   }
 
-  Category getTaskCategory(int categoryId) {
-    return categoriesList.singleWhere((element) => element.id == categoryId);
+  // Category getTaskCategory(int categoryId) {
+  //   return categoriesList.singleWhere((element) => element.id == categoryId);
+  // }
+  Future<Category> getTaskCategory(int categoryId) async {
+    CategoriesInteractor service = CategoriesInteractor();
+    Category category = await service.getOneCategory(categoryId);
+    return category;
   }
 
   Future<void> getCategories() async {
     CategoriesInteractor service = CategoriesInteractor();
     categoriesList = await service.getCategories();
+    for (var element in categoriesList) {
+      print({element.id, element.name});
+    }
+
     update(['categories list']);
   }
 
-  int? getFirstCategory() {
-    return categoriesList.first.id;
+  Future<int?> getFirstCategory() async {
+    CategoriesInteractor service = CategoriesInteractor();
+    List<Category> category = await service.getCategories();
+    return category.first.id;
   }
 
   void toggleTaskCompletion(Task task) async {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app_updated/features/tasks/widgets/labeled_icon_widget.dart';
 
 class ShareTaskWidget extends StatelessWidget {
-  ShareTaskWidget(
+  const ShareTaskWidget(
       {super.key,
       required this.pathSvg,
       required this.text,

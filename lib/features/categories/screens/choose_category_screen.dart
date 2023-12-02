@@ -9,16 +9,20 @@ import 'package:todo_app_updated/features/categories/screens/create_category_scr
 import 'package:todo_app_updated/features/categories/widgets/delete_category.circle.dart';
 import 'package:todo_app_updated/features/categories/widgets/material_botton.dart';
 import 'package:todo_app_updated/features/home/controllers/home_controller.dart';
-import 'package:todo_app_updated/features/tasks/controllers/task_form_controller.dart';
+import 'package:todo_app_updated/features/tasks/controllers/add_new_task_controller.dart';
+import 'package:todo_app_updated/features/tasks/controllers/edit_task_controller.dart';
 import '../widgets/category_item.dart';
 
 class ChooseCategoryScreen extends StatelessWidget {
-  ChooseCategoryScreen({super.key, required this.controller})
+  ChooseCategoryScreen({super.key})
       : _homeController = Get.find<HomeController>(),
         _deleteController = Get.put(DeleteCategoryController());
 
   final HomeController _homeController;
-  final TaskFormController controller;
+  // final TaskFormController controller;
+  final AddNewTaskController _addTaskController =
+      Get.find<AddNewTaskController>();
+
   final DeleteCategoryController _deleteController;
   @override
   Widget build(BuildContext context) {
@@ -77,7 +81,14 @@ class ChooseCategoryScreen extends StatelessWidget {
                             name: categories[index].name,
                             color: categories[index].color,
                             onTap: () {
-                              controller.onCategoryTypePressed(index + 1);
+                              if (!_addTaskController.isClosed) {
+                                _addTaskController
+                                    .onCategoryTypePressed(index + 1);
+                              } else {
+                                Get.find<EditTaskController>()
+                                    .onCategoryTypePressed(index + 1);
+                              }
+                              // controller.onCategoryTypePressed(index + 1);
                             },
                           ),
                         );
