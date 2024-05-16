@@ -34,6 +34,7 @@ class AddNewTaskController extends TaskFormController with onChangeCategory {
 
   void addNewTask() async {
     if (isCategoryListEmpty) return;
+    
 
     HomeController homeController = Get.find<HomeController>();
     String timeFormat = DateFormat("hh:mm a").format(selectedDate).toString();
